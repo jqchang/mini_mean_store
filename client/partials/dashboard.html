@@ -1,0 +1,29 @@
+<fieldset>
+  <legend>Dashboard</legend>
+  <div class='sidebar'>
+    <form ng-submit='search=newSearch'>
+      Search: <input ng-model='newSearch' placeholder='search...'> <input type='submit' value='Filter'>
+    </form>
+  </div>
+  <div class='wrapper'>
+    <ul class='gallery' ng-repeat="product in products | filter:search | orderBy:ordering | limitTo:prodLimit track by $index">
+      <li>
+        <img src='{{product.imgurl}}' alt='{{product.name}}' ng-if='product.imgurl'>
+        <div ng-if='!product.imgurl'></div><br>
+        {{product.name}}<br>
+        ({{product.qty}} left)
+      </li>
+    </ul>
+    <br><button ng-click='showMore("product")'>Show More</button>
+    <h4>Recent orders</h4>
+    <ul ng-repeat='order in orders | limitTo: orderLimit | filter:search'>
+      <li>{{order.customer.name}} purchased {{order.qty}} {{order.product.name}}s...</li>
+    </ul>
+    <button ng-click='showMore("order")'>Show All</button>
+    <h4>New customers</h4>
+    <ul ng-repeat='customer in customers | limitTo: custLimit | filter:search'>
+      <li>{{customer.name}} joined the store.</li>
+    </ul>
+    <button ng-click='showMore("customer")'>Show All</button>
+  </div>
+</fieldset>

@@ -1,0 +1,62 @@
+<fieldset>
+  <legend>Orders</legend>
+  <h4>Add a new order</h4>
+  <form ng-submit='create()'>
+    <table>
+      <tbody>
+        <tr>
+          <td>Customer Name:</td>
+          <td><select ng-model='newOrder.customer' ng-options='customer.name for customer in customers'></select></td>
+        </tr>
+        <tr>
+          <td>Product:</td>
+          <td><select ng-model='newOrder.product' ng-options='(product.name)+" ("+(product.qty)+" left)" for product in products'></select></td>
+        </tr>
+        <tr>
+          <td>Quantity:</td>
+          <td><select ng-model='newOrder.qty' ng-options='n for n in [] | range:1:newOrder.product.qty+1'></td>
+        </tr>
+      </tbody>
+    </table>
+    <input type='submit' value='Add'>
+  </form>
+  <br>
+  Search: <input type='text' ng-model='search.name' placeholder='Search by name'>
+  <table class='data'>
+    <thead>
+      <th ng-click='order("customer.name")'>
+        Customer Name
+        <span ng-if='ordering=="customer.name"'>&#x25b4;</span>
+        <span ng-if='ordering=="-customer.name"'>&#x25be;</span>
+      </th>
+      <th ng-click='order("product.name")'>
+        Product
+        <span ng-if='ordering=="product.name"'>&#x25b4;</span>
+        <span ng-if='ordering=="-product.name"'>&#x25be;</span>
+      </th>
+      <th ng-click='order("qty")'>
+        Qty
+        <span ng-if='ordering=="qty"'>&#x25b4;</span>
+        <span ng-if='ordering=="-qty"'>&#x25be;</span>
+      </th>
+      <th ng-click='order("createdAt")'>
+        Date
+        <span ng-if='ordering=="createdAt"'>&#x25b4;</span>
+        <span ng-if='ordering=="-createdAt"'>&#x25be;</span>
+      </th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="order in orders | filter:search | orderBy:ordering track by $index">
+        <td ng-bind="order.customer.name"></td>
+        <td ng-bind="order.product.name"></td>
+        <td ng-bind="order.qty"></td>
+        <td ng-bind="order.createdAt | date:mediumDate"></td>
+        <td><button ng-click='delete(order)'>Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ul ng-if='errors.length'>
+    <li ng-repeat='error in errors' ng-bind='error'></li>
+  </ul>
+</fieldset>

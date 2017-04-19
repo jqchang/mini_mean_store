@@ -1,0 +1,35 @@
+<fieldset>
+  <legend>Customers</legend>
+  <h4>Add a new customer</h4>
+  <form ng-submit='create()'>
+    Customer Name: <input type='text' placeholder="Customer Name" ng-model='newCustomer.name'>
+    <input type='submit' value='Add'>
+  </form>
+  <br>
+  Search: <input type='text' ng-model='search.name' placeholder='Search by name'>
+  <table class='data'>
+    <thead>
+      <th ng-click='order("name")'>
+        Customer Name
+        <span ng-if='ordering=="name"'>&#x25b4;</span>
+        <span ng-if='ordering=="-name"'>&#x25be;</span>
+      </th>
+      <th ng-click='order("createdAt")'>
+        Created Date
+        <span ng-if='ordering=="createdAt"'>&#x25b4;</span>
+        <span ng-if='ordering=="-createdAt"'>&#x25be;</span>
+      </th>
+      <th>Actions</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="customer in customers | filter:search | orderBy:ordering track by $index">
+        <td ng-bind="customer.name"></td>
+        <td ng-bind="customer.createdAt | date:mediumDate"></td>
+        <td><button ng-click='delete(customer)'>Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ul ng-if='errors.length'>
+    <li ng-repeat='error in errors' ng-bind='error'></li>
+  </ul>
+</fieldset>

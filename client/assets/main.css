@@ -1,0 +1,42 @@
+.navbar li, .gallery li {
+  display: inline;
+}
+
+.data {
+  border: 1px black solid;
+}
+
+.data th, .data td {
+  border: 1px black solid;
+}
+
+.gallery {
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+}
+
+.gallery li {
+  display: inline-block;
+  width: 150px;
+  border: 1px black solid;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.gallery li img, .gallery div{
+  display: inline-block;
+  height: 100px;
+  width: 100px;
+}
+
+.sidebar {
+  display: inline-block;
+  vertical-align: top;
+  width: 20%;
+}
+.wrapper {
+  display: inline-block;
+  width: auto;
+}

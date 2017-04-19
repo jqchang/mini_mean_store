@@ -1,0 +1,44 @@
+<fieldset>
+  <legend>Products</legend>
+  <div class='sidebar'>
+    <h4>Add a new product</h4>
+    <form ng-submit='create()'>
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td><input type='text' placeholder="name" ng-model='newProduct.name'></td>
+        </tr>
+        <tr>
+          <td>Image (url):</td>
+          <td><input type='text' placeholder='http://' ng-model='newProduct.imgurl'></td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td><textarea ng-model='newProduct.description'></textarea></td>
+        </tr>
+        <tr>
+          <td>Initial Quantity:</td>
+          <td><select ng-model='newProduct.qty' ng-options='n for n in [] | range:1:100'>
+          </select></td>
+        </tr>
+      </table>
+      <input type='submit' value='Add'>
+    </form>
+  </div>
+  <div class='wrapper'>
+    <br>
+    Search: <input type='text' ng-model='search.name' placeholder='Search by name'>
+    <br>
+    <ul class='gallery' ng-repeat="product in products | filter:search | orderBy:ordering track by $index">
+      <li>
+        <img src='{{product.imgurl}}' alt='{{product.name}}' ng-if='product.imgurl'>
+        <div ng-if='!product.imgurl'></div><br>
+        {{product.name}}<br>
+        ({{product.qty}} left)
+      </li>
+    </ul>
+    <ul ng-if='errors.length'>
+      <li ng-repeat='error in errors' ng-bind='error'></li>
+    </ul>
+  </div>
+</fieldset>

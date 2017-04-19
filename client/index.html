@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="/angular/angular.js" charset="utf-8"></script>
+    <script src="/angular-route/angular-route.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="./assets/main.css">
+    <script src="./js/config/routes.js"></script>
+    <script src="./js/factories/customerFactory.js"></script>
+    <script src="./js/controllers/CustomerController.js"></script>
+    <script src="./js/factories/productFactory.js"></script>
+    <script src="./js/controllers/ProductController.js"></script>
+    <script src="./js/factories/orderFactory.js"></script>
+    <script src="./js/controllers/OrderController.js"></script>
+  </head>
+  <body>
+    <div class='navbar'>
+      <ul>
+        <li><a href='#!/'>Dashboard</a></li>
+        <li>|</li>
+        <li><a href='#!/products'>Products</a></li>
+        <li>|</li>
+        <li><a href='#!/orders'>Orders</a></li>
+        <li>|</li>
+        <li><a href='#!/customers'>Customers</a></li>
+        <li>|</li>
+        <li><a href='#!/settings'>Settings</a></li>
+      </ul>
+    </div>
+    <div ng-view>
+
+    </div>
+  </body>
+</html>
